@@ -118,29 +118,21 @@ function voiceCard(card) {
 function readWord() {
     const cards = document.querySelectorAll('.card');
     let word = '';
-    let utterances = [];
 
+    // Concatenate the letters/syllables from each card to form the word
     cards.forEach(card => {
         const letter = card.getAttribute('data-letter');
         word += letter;
-        // const msg = new SpeechSynthesisUtterance(letter);
-        // setFemaleVoice(msg);
-        // utterances.push(msg);
     });
 
+    // Create a single utterance for the full word
     const wordUtterance = new SpeechSynthesisUtterance(word);
     setFemaleVoice(wordUtterance);
-    utterances.push(wordUtterance);
+    
+    // Speak the complete word
+    window.speechSynthesis.speak(wordUtterance);
 
-    utterances.reduce((promise, utterance) => {
-        return promise.then(() => {
-            return new Promise(resolve => {
-                utterance.onend = resolve;
-                window.speechSynthesis.speak(utterance);
-            });
-        });
-    }, Promise.resolve());
-
+    // Optionally check for the definition of the full word
     checkWordDefinition(word);
 }
 
