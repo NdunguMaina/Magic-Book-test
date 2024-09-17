@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Book</title>
+    <link rel="stylesheet" href="styles.css">
+   
+</head>
+<body>
+    
+    <div id="splash-screen">
+        <img src="./images/splash.png" alt="Loading Image">
+        <h1>Loading...</h1>
+    </div>
+   
+    <div id="navbar">
+        <a href="./index.html" class="active">Home</a>
+        <a href="./about.html">About</a>
+        
+    </div>
+    <div class="instructions">
+        <h1>Magic Book</h1>
+        <p>Click on the cards to hear their sounds. Use the arrows to change the letters and syllables.</p>
+    </div>
+    <div class="container" id="card-container"></div>
+    <button onclick="readWord()">Read Word</button>
+    <div id="definition-container">
+        <p id="definition"></p>
+        <button id="speak-definition" onclick="speakDefinition()" style="display: none;">
+            🔊
+        </button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const heading = document.querySelector('h1');
+            heading.textContent += ' 📖';
+
+            setTimeout(function() {
+                document.getElementById('splash-screen').style.display = 'none';
+                document.getElementById('navbar').style.display = 'block';
+            }, 2000); 
+        });
+    </script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname;
+            const navbarLinks = document.querySelectorAll('#navbar a');
+
+            navbarLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
